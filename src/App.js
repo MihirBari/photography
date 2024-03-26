@@ -1,8 +1,14 @@
 import React from "react";
-import {HeroParallaxDemo} from "./HeroParallaxDemo";
+import { HeroParallaxDemo } from "./HeroParallaxDemo";
+import Banner from "./Banner";
 
 function App() {
-  return <HeroParallaxDemo />;
+  return (
+    <>
+     <Banner />
+      <HeroParallaxDemo />
+    </>
+  );
 }
 
 export default App;
