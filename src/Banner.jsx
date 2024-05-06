@@ -1,15 +1,13 @@
-// Banner.js
-
 import React, { useEffect, useState } from "react";
 import video from "./image/Mayur.mp4";
+import logo from "./image/PM_LOGO.png";
 
 const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsdeleting] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const toRotate = ["Pixel Magic"];
-  
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -39,12 +37,25 @@ const Banner = () => {
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src={video} type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
       <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full z-10">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-bold mb-4">
-          {text}
-        </h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent:"center"
+          }}
+        >
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-bold mb-4">
+            {text}
+          </h1>
+          <img
+            style={{ height: "7rem", width: "auto", marginLeft: "1rem" }}
+            src={logo}
+            alt=""
+          />
+        </div>
         <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white">
           Your subtitle or additional information here
         </p>

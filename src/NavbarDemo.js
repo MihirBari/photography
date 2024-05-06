@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, MenuItem } from "./component/ui/navbar-menu";
 import { cn } from "./utils/cn";
 import { Link } from "react-router-dom";
+import logo from "./image/PM_LOGO.png";
 
 export function NavbarDemo() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,30 +33,35 @@ export function NavbarDemo() {
   );
 }
 
-function Navbar({ className, scrolled }) {
-  const [active, setActive] = useState(null);
+  function Navbar({ className, scrolled }) {
+    const [active, setActive] = useState(null);
 
-  return (
-    <div
-      className={cn(
-        "fixed rounded-full inset-x-0 max-w-2xl mx-auto z-50",
-        scrolled ? "bg-blue-500 dark:bg-blue-900" : "bg-transparent",
-        className
-      )}
-    >
-      <Menu setActive={setActive}>
-      <Link to="/">
-        <MenuItem setActive={setActive} active={active} item="Home">
-        </MenuItem>
-        </Link>
-        <Link to='/Portfolio' >
-        <MenuItem setActive={setActive} active={active} item="Portfolio">
-        </MenuItem>
-        </Link>
-        
-      </Menu>
-    </div>
-  );
-}
+    return (
+      <div
+        className={cn(
+          "fixed rounded-full inset-x-0 max-w-2xl mx-auto z-50",
+          scrolled ? "bg-blue-500 dark:bg-blue-900" : "bg-transparent",
+          className
+        )}
+      >
+        <Menu setActive={setActive}>
+        <img
+              style={{ height: "2.2rem", width: "auto" }}
+              src={logo}
+              alt=""
+            />
+        <Link to="/">
+          <MenuItem setActive={setActive} active={active} item="Home">
+          </MenuItem>
+          </Link>
+          <Link to='/Portfolio' >
+          <MenuItem setActive={setActive} active={active} item="Portfolio">
+          </MenuItem>
+          </Link>
+          
+        </Menu>
+      </div>
+    );
+  }
 
 export default NavbarDemo;

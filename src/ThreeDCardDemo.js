@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardBody, CardContainer, CardItem } from "./component/ui/3d-card";
 import "./ThreeDCardDemo.css";
 import img1 from "./image/flower.jpg"
@@ -11,42 +11,70 @@ const cardsData = [
   {
     title: "Make things float in air",
     description: "Hover over this card to unleash the power of CSS perspective",
-    imageUrl: img1,
-    linkUrl: "https://twitter.com/mannupaaji",
-    linkText: "Try now →",
+    imageUrls: [img1, img2, img3],
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, metus et ullamcorper ultrices, urna justo mattis neque, nec condimentum orci ex eget justo."
   },
   {
     title: "Make things float in air",
     description: "Hover over this card to unleash the power of CSS perspective",
-    imageUrl: img2,
-    linkUrl: "https://twitter.com/mannupaaji",
-    linkText: "Try now →",
+    imageUrls: [img1, img2, img3],
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, metus et ullamcorper ultrices, urna justo mattis neque, nec condimentum orci ex eget justo."
   },
   {
     title: "Make things float in air",
     description: "Hover over this card to unleash the power of CSS perspective",
-    imageUrl: img3,
-    linkUrl: "https://twitter.com/mannupaaji",
-    linkText: "Try now →",
+    imageUrls: [img1, img2, img3],
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, metus et ullamcorper ultrices, urna justo mattis neque, nec condimentum orci ex eget justo."
   },
   {
     title: "Make things float in air",
     description: "Hover over this card to unleash the power of CSS perspective",
-    imageUrl: img4,
-    linkUrl: "https://twitter.com/mannupaaji",
-    linkText: "Try now →",
+    imageUrls: [img4, img2, img3],
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, metus et ullamcorper ultrices, urna justo mattis neque, nec condimentum orci ex eget justo."
   },
   {
     title: "Make things float in air",
     description: "Hover over this card to unleash the power of CSS perspective",
-    imageUrl: img5,
-    linkUrl: "https://twitter.com/mannupaaji",
-    linkText: "Try now →",
+    imageUrls: [img5],
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, metus et ullamcorper ultrices, urna justo mattis neque, nec condimentum orci ex eget justo."
   },
-  // Add more card data objects here if needed
 ];
 
+const ImageSlider = ({ images }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const previousImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  return (
+    <div className="relative w-full h-full">
+      <img src={images[currentImageIndex]} className="w-full h-full object-cover" alt="slider" />
+      <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-between items-center">
+        <button onClick={previousImage} className="px-3 py-1  text-white absolute left-0 transform -translate-y-1/2">
+          &lt; {/* Previous arrow */}
+        </button>
+        <button onClick={nextImage} className="px-3 py-1  text-white absolute right-0 transform -translate-y-1/2">
+          &gt; {/* Next arrow */}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const ThreeDCardDemo = () => {
+  const [expandedIndex, setExpandedIndex] = useState(-1);
+
+  const toggleExpansion = (index) => {
+    setExpandedIndex((prevIndex) => (prevIndex === index ? -1 : index));
+  };
+
   return (
     <> 
     <h1><b>Photographs Gallery</b></h1>
@@ -54,43 +82,28 @@ const ThreeDCardDemo = () => {
       {cardsData.map((card, index) => (
         <CardContainer className="inter-var" key={index}>
           <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-            <CardItem
-              translateZ="50"
-              className="text-xl font-bold text-neutral-600 dark:text-white"
-            >
-              {card.title} 
+            <CardItem translateZ="50" className="text-xl font-bold text-neutral-600 dark:text-white">
+              {card.title} {/* Title */}
             </CardItem>
             <CardItem translateZ="100" className="w-full mt-4">
-              <img
-                src={card.imageUrl} 
-                className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-                alt="thumbnail"
-              />
+              {card.imageUrls && card.imageUrls.length > 0 ? (
+                <ImageSlider images={card.imageUrls} />
+              ) : (
+                <div>No images available</div>
+              )}
             </CardItem>
-            <CardItem
-              as="p"
-              translateZ="60"
-              className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-            >
-            {card.description}
+            <CardItem as="p" translateZ="60" className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300">
+              {card.description}
             </CardItem>
-            <div className="flex justify-between items-center mt-20">
-              {/* <CardItem
-                translateZ={20}
-                as={Link}
-                href={card.linkUrl} 
-                target="__blank"
-                className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
-              >
-                {card.linkText} 
+            {expandedIndex === index && (
+              <CardItem as="div" className="mt-2">
+                {card.content}
               </CardItem>
-              <CardItem
-                translateZ={20}
-                as="button"
-                className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
-              >
-                Sign up
-              </CardItem> */}
+            )}
+            <div className="flex justify-center items-center mt-4">
+              <button onClick={() => toggleExpansion(index)} className="text-blue-500">
+                {expandedIndex === index ? "Hide Content" : "Show Content"}
+              </button>
             </div>
           </CardBody>
         </CardContainer>
