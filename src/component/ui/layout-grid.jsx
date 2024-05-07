@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { cn } from "../../utils/cn";
+import { cn } from  "../../utils/cn";
 
 const LayoutGrid = ({ cards }) => {
   const [selected, setSelected] = useState(null);
@@ -17,7 +17,7 @@ const LayoutGrid = ({ cards }) => {
   };
 
   return (
-    <div className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-3  max-w-7xl mx-auto gap-4 ">
+    <div className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto gap-4 relative">
       {cards.map((card, i) => (
         <div key={i} className={cn(card.className, "")}>
           <motion.div
@@ -77,9 +77,9 @@ const SelectedCard = ({ selected }) => {
         animate={{
           opacity: 0,
         }}
-        className="object-cover object-top absolute inset-0 h-full w-full bg-black opacity-60 z-10"
+        className="absolute inset-0 h-full w-full bg-black opacity-60 z-10"
       />
-      <motion.div
+        <motion.div
         initial={{
           opacity: 0,
           y: 100,

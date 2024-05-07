@@ -13,7 +13,6 @@ export function LayoutGridDemo() {
   );
 }
 
-
 const cards = [
   {
     id: 1,

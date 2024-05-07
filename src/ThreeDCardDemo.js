@@ -17,13 +17,13 @@ const cardsData = [
   {
     title: "Make things float in air",
     description: "Hover over this card to unleash the power of CSS perspective",
-    imageUrls: [img1, img2, img3],
+    imageUrls: [img2, img3, img1],
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, metus et ullamcorper ultrices, urna justo mattis neque, nec condimentum orci ex eget justo."
   },
   {
     title: "Make things float in air",
     description: "Hover over this card to unleash the power of CSS perspective",
-    imageUrls: [img1, img2, img3],
+    imageUrls: [img3, img2, img1],
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula, metus et ullamcorper ultrices, urna justo mattis neque, nec condimentum orci ex eget justo."
   },
   {
